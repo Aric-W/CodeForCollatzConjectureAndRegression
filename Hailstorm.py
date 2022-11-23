@@ -1,7 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import math
+import DMARCGMforfinal
 
+
+#generates a list of integers up to n
 def FillInts(n):
     i = n
     nums = []
@@ -10,6 +13,9 @@ def FillInts(n):
         i=i-1
     return nums
 
+#generates list of powers of k up to e
+#also generates list of strings k^0,k^1,...,k^e
+#returns them as a tuple
 def powers(k,e):
     res = []
     nums = []
@@ -36,6 +42,9 @@ def Hailstorm(n):
         tst = tst + 1
     return tst, seq
 
+def GiveFunc():
+    return 10 + (1/50)*x
+
 tup = Hailstorm(47)
 print(tup[0])    
 #print(tup[1])
@@ -59,9 +68,11 @@ while(i < len(nums)):
 #plt.scatter(nums[0], tsts)
 
 x = np.arange(0,50,1)
-y = -50 + (1/50)*x
+y = GiveFunc()
+y2 = x
 plt.xlabel("integers")
 plt.ylabel("total stopping times")
 plt.plot(x,y,'orange')
+plt.plot(x,y2,'red')
 plt.scatter(nums,tsts)
 plt.show()
