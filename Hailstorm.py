@@ -36,12 +36,12 @@ def Hailstorm(n):
         tst = tst + 1
     return tst, seq
 
-tup = Hailstorm(497)
+tup = Hailstorm(47)
 print(tup[0])    
 #print(tup[1])
 
 
-nums = FillInts(5000)
+nums = FillInts(50)
 #powers7 = powers(2,10)
 tsts = []
 
@@ -58,7 +58,7 @@ while(i < len(nums)):
 
 #plt.scatter(nums[0], tsts)
 
-x = np.arange(0,5000,1)
+x = np.arange(0,50,1)
 y = -50 + (1/50)*x
 plt.xlabel("integers")
 plt.ylabel("total stopping times")
