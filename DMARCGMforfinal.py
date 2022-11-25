@@ -35,17 +35,19 @@ def LinearCGDMAR(A, b, x0, tol=1e-5):
         pk = -rk + beta * pk
         
         num_iter += 1
-        curve_x.append(xk)
+        #curve_x.append(xk)
         rk_norm = np.linalg.norm(rk)
-        print('Iteration: {} \t x = {} \t residual = {:.4f}'.
-              format(num_iter, xk, rk_norm))
+        #print('Iteration: {} \t x = {} \t residual = {:.4f}'.
+        #      format(num_iter, xk, rk_norm))
     
-    print('\nSolution: \t x = {}'.format(xk))
+    #print('\nSolution: \t x = {}'.format(xk))
         
-    return np.array(curve_x)
+    #return np.array(curve_x)
+    return xk
 
-A = [[1,0],[0,1]]
-x0 = [1,1]
+#first array is the topmost row
+A = [[5,0],[1,1]]
+x0 = [0,0]
 b = [1,1]
 
-LinearCGDMAR(A, b, x0, tol=1e-5)
+print(LinearCGDMAR(A, b, x0, tol=1e-7))
