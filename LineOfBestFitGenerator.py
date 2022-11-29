@@ -70,8 +70,6 @@ def GenLeastSquaresQ(xs,ys,x):
 #colors will always be a list
 def PlotEverything(data,tsts,lines,colors,range):
 
-    
-    
 
     plt.scatter(data, tsts)
     plt.xlabel("integers")
@@ -80,12 +78,8 @@ def PlotEverything(data,tsts,lines,colors,range):
    
     i=0
     for line in lines:
-        plt.plot(range,line,colors[i])
+        plt.plot(range[i],line,colors[i])
         i=i+1
-
-    
-
-    
 
     plt.show()
 
