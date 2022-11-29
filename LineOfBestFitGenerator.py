@@ -34,8 +34,20 @@ def SolveForRegParamL(xs,ys):
     A = np.array([[(len(xs)+len(ys))/2,SpecializedSum(xs,1)[1]],[SpecializedSum(xs,1)[1],SpecializedSum(xs,2)[1]]])
     b = np.array([SpecializedSum(ys,1)[1],ProdSum(xs,ys,1,1)])
 
-    #starts at the origin as the initial guess 
+    
     x0 = np.array([1,1])
+    aT = UseDmar.LinearCGDMAR(A, b, x0, tol=1e-7)
+
+    return aT
+
+def SolveForRegParamQ(xs,ys):
+    A = np.array([[(len(xs)+len(ys))/2,SpecializedSum(xs,1)[1],SpecializedSum(xs,2)[1]],
+    [SpecializedSum(xs,1)[1],SpecializedSum(xs,2)[1],SpecializedSum(xs,3)[1]],
+    [SpecializedSum(xs,2)[1],SpecializedSum(xs,3)[1],SpecializedSum(xs,4)[1]]])
+    b = np.array([SpecializedSum(ys,1)[1],ProdSum(xs,ys,1,1),ProdSum(xs,ys,2,1)])
+
+    
+    x0 = np.array([1,1,1])
     aT = UseDmar.LinearCGDMAR(A, b, x0, tol=1e-7)
 
     return aT
@@ -48,6 +60,12 @@ def GenLeastSquaresL(xs,ys,x):
 
     return y
 
+def GenLeastSquaresQ(xs,ys,x):
+    regParam = SolveForRegParamQ(xs,ys)
+
+    y = regParam[0] + regParam[1]*x +regParam[2]*pow(x,2)
+
+    return y
 
 #colors will always be a list
 def PlotEverything(data,tsts,lines,colors,range):

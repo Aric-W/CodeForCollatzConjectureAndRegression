@@ -14,6 +14,14 @@ def FillInts(n):
         i=i-1
     return nums
 
+def MultiplesOf(n,m):
+    i = m
+    nums = []
+    while(i > 0):
+        nums.append(n*i)
+        i = i-1
+    return nums
+    
 #generates list of powers of k up to e
 #also generates list of strings k^0,k^1,...,k^e
 #returns them as a tuple
