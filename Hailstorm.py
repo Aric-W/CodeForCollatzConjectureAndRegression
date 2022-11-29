@@ -29,7 +29,9 @@ def powers(k,e):
 
 
 
-#generates Hailstone sequences for a given positive integer.
+#generates Hailstone sequence for a given positive integer n.
+#returns a tuple with tuple[0] = total stopping time of n
+#tuple[1] is the hailstone sequence of n
 def Hailstone(n):
     seq = []
     xn = n
@@ -47,15 +49,19 @@ def Hailstone(n):
 def Hailstorm(integers):
     i = 0
     tsts = []
-    while(i < len(integers)):
-        tsts.append(Hailstone(integers[i]))
-        i = 1+1
+    stormSize = len(integers)
+
+    while(i < stormSize):
+        tsts.append(Hailstone(integers[i])[0])
+        i = i+1
 
     return tsts
+
+
 def GiveFunc():
     return 10 + (1/50)*x,x
 
-tup = Hailstone(2e10)
+tup = Hailstone(50)
 print(tup[0])    
 #print(tup[1])
 
@@ -73,15 +79,15 @@ tsts = Hailstorm(nums);
 
 
 
-plt.scatter(nums[0], tsts)
+# plt.scatter(nums, tsts)
 
-x = np.arange(0,50,1)
-y = GiveFunc()[0]
-#y2 = x
-y2 = GiveFunc()[1]
-plt.xlabel("integers")
-plt.ylabel("total stopping times")
-plt.plot(x,y,'orange')
-plt.plot(x,y2,'red')
-plt.scatter(nums,tsts)
-plt.show()
+# x = np.arange(0,50,1)
+# y = GiveFunc()[0]
+# #y2 = x
+# y2 = GiveFunc()[1]
+# plt.xlabel("integers")
+# plt.ylabel("total stopping times")
+# plt.plot(x,y,'orange')
+# plt.plot(x,y2,'red')
+# #plt.scatter(nums,tsts)
+# plt.show()
