@@ -1,6 +1,7 @@
 import DMARCGMforfinal as UseDmar
 import numpy as np
 import matplotlib.pyplot as plt
+import Hailstorm as H
 
 
 
@@ -53,33 +54,37 @@ def SolveForRegParamQ(xs,ys):
     return aT
 
 #gives us the actual line of best fit
-def GenLeastSquaresL(xs,ys,x):
+def GenLeastSquaresL(xs,ys):
     regParam = SolveForRegParamL(xs,ys)
 
+    x = np.arange(1,len(xs)+1,1)
     y = regParam[0] + regParam[1]*x
 
     return y
 
-def GenLeastSquaresQ(xs,ys,x):
+def GenLeastSquaresQ(xs,ys):
     regParam = SolveForRegParamQ(xs,ys)
 
+    x = np.arange(1,len(xs)+1,1)
     y = regParam[0] + regParam[1]*x +regParam[2]*pow(x,2)
 
     return y
 
-#colors will always be a list
-def PlotEverything(data,tsts,lines,colors,range):
 
+def PlotEverything(data,colors = ['blue','red','yellow']):
+    tstsForScatter = H.Hailstorm(data)
 
-    plt.scatter(data, tsts)
+    plt.scatter(data,tstsForScatter,c=colors[0])
     plt.xlabel("integers")
     plt.ylabel("total stopping times")
 
-   
-    i=0
-    for line in lines:
-        plt.plot(range[i],line,colors[i])
-        i=i+1
+    yL = GenLeastSquaresL(data,H.Hailstorm(data))
+    yQ = GenLeastSquaresQ(data,H.Hailstorm(data))
+
+    plt.plot(data,yL,color=colors[1])
+    plt.plot(data,yQ,color=colors[2])
 
     plt.show()
+
+
 

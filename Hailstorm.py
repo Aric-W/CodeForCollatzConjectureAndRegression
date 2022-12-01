@@ -7,34 +7,12 @@ import matplotlib.pyplot as plt
 #generates a list of integers up to n
 
 def FillInts(n):
-    i = n
+    i = 1
     nums = []
-    while (i > 0):
+    while (i < n+1):
         nums.append(i)
-        i=i-1
+        i=i+1
     return nums
-
-def MultiplesOf(n,m):
-    i = m
-    nums = []
-    while(i > 0):
-        nums.append(n*i)
-        i = i-1
-    return nums
-
-#generates list of powers of k up to e
-#also generates list of strings k^0,k^1,...,k^e
-#returns them as a tuple
-def powers(k,e):
-    res = []
-    nums = []
-    i = 0
-    while (i <= e):
-        res.append(pow(k,i))
-        nums.append(str(k) + "^" +  str(i))
-        i = i+1
-    return res,nums
-
 
 
 #generates Hailstone sequence for a given positive integer n.
@@ -43,7 +21,10 @@ def powers(k,e):
 def Hailstone(n):
     seq = []
     xn = n
-    tst = 1
+    tst = 0
+    
+    if(n == 1):
+        return 3,[4,2,1]
     while (xn > 1):
         if (xn % 2 == 0):
             xn =  np.floor(xn/2)
@@ -53,24 +34,46 @@ def Hailstone(n):
         tst = tst + 1
     return tst, seq
 
+#splits the set of integers up into cosets and calculates tst
+#thus creates the separate "streams" of the storm
+def SplitIntoStreams(data, modulus):
 
-def Hailstorm(integers, injective=False):
-    i = 0
-   
-    stormSize = len(integers)
+    cosets = []
+    remainder = 0
+    while(remainder < modulus):
+        cosets.append([])
+        remainder = remainder + 1
 
-    if(injective):
-        tsts = set();
-        while(i < stormSize):
-            tsts.append(Hailstone(integers[i])[0])
-            i = i+1
-    else:
-         tsts = []
-         while(i < stormSize):
-            tsts.append(Hailstone(integers[i])[0])
-            i = i+1
-        
+    j = 0
+    for i in range(1,len(data)):
+        cosets[j%modulus].append(i)
+        j=j+1
+    
+
+    return cosets
+
+#will generate a list of total stopping times from a list of integers
+def Hailstorm(integers):
+    
+    tsts = []
+
+    for i in range(0,len(integers)):
+        tsts.append(Hailstone(i)[0])
 
     return tsts
+
+        
+
+
+    
+
+
+
+
+
+
+
+
+
 
 

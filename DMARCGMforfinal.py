@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
-import numpy as np
+import numpy as np 
+import math
 
 
 def LinearCGDMAR(A, b, x0, tol=1e-5):
@@ -10,8 +11,8 @@ def LinearCGDMAR(A, b, x0, tol=1e-5):
     pk = -rk
     rk_norm = np.linalg.norm(rk)
     
-    num_iter = 0
     
+    iter = 0
     while rk_norm > tol:
         apk = np.dot(A, pk)
         rkrk = np.dot(rk, rk)
@@ -26,7 +27,7 @@ def LinearCGDMAR(A, b, x0, tol=1e-5):
         normgksquare = normgk**2
 
         LHS = normgksquare
-        RHS =(normgk/np.linalg.norm(gk-gkminusone)**2) *(np.dot(gkminusone,gk))
+        RHS =(normgk/np.linalg.norm(gk-gkminusone)**2) *abs((np.dot(gkminusone,gk)))
         
         #calculating the DMAR search direction
         if(LHS >= RHS):
@@ -37,9 +38,10 @@ def LinearCGDMAR(A, b, x0, tol=1e-5):
 
         pk = -rk + beta * pk
         
-        num_iter += 1
+        
         
         rk_norm = np.linalg.norm(rk)
+        iter = iter+1
         
     return xk
 
