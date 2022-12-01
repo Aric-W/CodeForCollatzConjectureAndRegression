@@ -58,7 +58,7 @@ def Hailstorm(integers):
     tsts = []
 
     for i in range(0,len(integers)):
-        tsts.append(Hailstone(i)[0])
+        tsts.append(Hailstone(integers[i])[0])
 
     return tsts
 

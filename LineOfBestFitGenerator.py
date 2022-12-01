@@ -57,21 +57,23 @@ def SolveForRegParamQ(xs,ys):
 def GenLeastSquaresL(xs,ys):
     regParam = SolveForRegParamL(xs,ys)
 
-    x = np.arange(1,len(xs)+1,1)
+    x = np.arange(xs[0],xs[len(xs)-1]+1,1)
     y = regParam[0] + regParam[1]*x
 
-    return y
+    return y,x
 
 def GenLeastSquaresQ(xs,ys):
     regParam = SolveForRegParamQ(xs,ys)
 
-    x = np.arange(1,len(xs)+1,1)
+    x = np.arange(xs[0],xs[len(xs)-1]+1,1)
     y = regParam[0] + regParam[1]*x +regParam[2]*pow(x,2)
 
-    return y
+    return y,x
 
 
 def PlotEverything(data,colors = ['blue','red','yellow']):
+    
+    
     tstsForScatter = H.Hailstorm(data)
 
     plt.scatter(data,tstsForScatter,c=colors[0])
@@ -79,10 +81,11 @@ def PlotEverything(data,colors = ['blue','red','yellow']):
     plt.ylabel("total stopping times")
 
     yL = GenLeastSquaresL(data,H.Hailstorm(data))
+    
     yQ = GenLeastSquaresQ(data,H.Hailstorm(data))
 
-    plt.plot(data,yL,color=colors[1])
-    plt.plot(data,yQ,color=colors[2])
+    plt.plot(yL[1],yL[0],color=colors[1])
+    plt.plot(yL[1],yQ[0],color=colors[2])
 
     plt.show()
 
