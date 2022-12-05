@@ -71,7 +71,7 @@ def GenLeastSquaresQ(xs,ys):
     return y,x
 
 
-def PlotEverything(data,colors = ['blue','red','yellow']):
+def PlotEverything(data,newFigureNeeded=False,colors = ['blue','red','yellow']):
     
     
     tstsForScatter = H.Hailstorm(data)
@@ -79,15 +79,20 @@ def PlotEverything(data,colors = ['blue','red','yellow']):
     plt.scatter(data,tstsForScatter,c=colors[0])
     plt.xlabel("integers")
     plt.ylabel("total stopping times")
-
-    yL = GenLeastSquaresL(data,H.Hailstorm(data))
     
-    yQ = GenLeastSquaresQ(data,H.Hailstorm(data))
+    
+    yL = GenLeastSquaresL(data,tstsForScatter)
+    
+    yQ = GenLeastSquaresQ(data,tstsForScatter)
 
     plt.plot(yL[1],yL[0],color=colors[1])
     plt.plot(yL[1],yQ[0],color=colors[2])
 
-    plt.show()
+    if(newFigureNeeded):
+        plt.figure()
+    
+
+    
 
 
 
